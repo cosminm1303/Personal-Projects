@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}" />
+</head>
+<body>
+<header class="header" th:fragment="headerFragment">
+   <div class="img"><a href="/"><img height="150px" th:src="@{/logo.png}"></a></div>
+    <div class="auth">
+        <ul>
+            <li class="dropdown">
+                <div class="cont">
+                <div class="userImage"><img height="30px" width="30px" th:src="@{/userImg.png}"></div>
+                <div><a href="javascript:void(0)" class="dropbtn">Contul meu</a>
+                <div class="dropdown-content">
+                    <a sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
+                    <a sec:authorize="isAnonymous()" href="/registration">Register</a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/account/details}">Detalii</a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+                </div>
+                </div>
+                </div>
+            </li>
+            <div class="cont">
+                <div class="userImage"><img th:src="@{/cartImg.png}"></div>
+                <div><li><a href="/cart">Cart</a></li></div>
+            </div>
+
+        </ul>
+    </div>
+</header>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}" />
+</head>
+<body>
+<nav class="nav" th:fragment="navigation">
+    <ul>
+        <li><a href="/admin">All Products</a></li>
+        <li class="dropdown"><a href="javascript:void(0)" class="dropbtn">Add product</a>
+            <div class="dropdown-content">
+                <a th:href="@{/admin/product/add/{type}(type='proteine')}">Add proteins</a>
+                <a th:href="@{/admin/product/add/{type}(type='creatina')}">Add Creatina</a>
+                <a th:href="@{/admin/product/add/{type}(type='aminoacizi')}">Add Aminoacizi</a>
+                <a th:href="@{/admin/product/add/{type}(type='imbracaminte')}">Add Imbracaminte</a>
+            </div></li>
+        <li><a href="/admin/category/add">Add Category</a></li>
+        <li><a href="/admin/category">All Categories</a></li>
+        <li><a href="/admin/subCategory/add">Add Sub Category</a></li>
+        <li><a href="/admin/subCategory">All Sub Categories</a></li>
+        <li style="float:right" sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</nav>
+</body>
+</html>

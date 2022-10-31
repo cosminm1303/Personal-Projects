@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/accountDetails.css}">
+</head>
+<body>
+<header th:replace="headerFrag :: headerFragment"></header>
+<nav th:replace="princMenuFragment :: homeNavigation"></nav>
+<div class="headA">
+    <h2 class="accTi">Contul meu</h2>
+</div>
+<div class="containerA">
+    <div class="subMenu">
+        <ul>
+            <li><a class="subA" th:href="@{/account/details}">Contul meu</a></li>
+            <li><a class="subA" th:href="@{/account/orders}">Comenzile mele</a></li>
+            <li><a class="subA" th:href="@{/account/address}">Adresele mele</a></li>
+        </ul>
+    </div>
+    <div class="mainColumnAdd">
+        <div class="block-title">
+            <strong>Adresa implicita</strong>
+        </div>
+        <div class="block-contentAdd">
+            <div class="address-info">
+                <div class="acc-info-title">
+                    <p>ADRESA DE LIVRARE IMPLICITA</p>
+                </div>
+                <div class="acc-info-main" >
+                    <th th:if="${address!=null}">
+                        <p th:text="${user.getFirstName()}+' '+${user.getLastName()}"></p>
+                        <p th:text="${user.getEmail()}"></p>
+                        <p th:text="${address.getStreet()}">Cosmin Mihu</p>
+                        <p th:text="'Nr. '+${address.getNumber()}+', '+${address.getCity()}+', '+${address.getCounty()}+', '+${address.getPostalCode()}">cosmin.mihu@yahoo.com</p>
+                        <p th:text="${address.getCountry()}">Cosmin Mihu</p>
+                    </th>
+                </div>
+                <div class="acc-info-actions">
+                    <a class="button-3" th:href="@{/account/address/add}" >Adaugati</a>
+                </div>
+            </div>
+            <div class="address-table">
+                <div class="acc-info-title">
+                    <p>Adrese Suplimentare</p>
+                </div>
+                <table>
+                    <thead>
+                    <tr class="thead">
+                        <th>Prenume</th>
+                        <th>Nume</th>
+                        <th>Tara</th>
+                        <th>Judet</th>
+                        <th>Oras</th>
+                        <th>Strada</th>
+                        <th>Cod Postal</th>
+                        <th>Telefon</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="address : ${addresses}">
+                        <td th:text="${user.getFirstName()}"></td>
+                        <td th:text="${user.getLastName()}"></td>
+                        <td th:text="${address.getCountry()}"></td>
+                        <td th:text="${address.getCounty()}"></td>
+                        <td th:text="${address.getCity()}"></td>
+                        <td th:text="${address.getStreet()}"></td>
+                        <td th:text="${address.getPostalCode()}"></td>
+                        <td th:text="${user.getPhoneNumber()}"></td>
+                        <td><a th:href="@{/account/address/update/{id}(id=${address.getId()})}"><button class="button-3">Modificati</button></a></td>
+                        <td><a th:href="@{/account/address/delete/{id}(id=${address.getId()})}"><button class="button-3">Stergeti</button></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

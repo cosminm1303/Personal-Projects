@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/productStyle.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}" />
+</head>
+<body>
+<header th:replace="headerFrag :: headerFragment"></header>
+<nav th:replace="princMenuFragment :: homeNavigation"></nav>
+<div class="container">
+    <div class="filters">
+    <div class="category">
+        <h3>Categories</h3>
+        <ul class="list">
+            <th th:each="category : ${categories}">
+            <a th:href="@{/shop/category/{cat}/{sCat}(cat=${cat},sCat=${category.toString()})}">
+                <li th:text="${category}"></li>
+            </a>
+            </th>
+        </ul>
+    </div>
+    <div class="category">
+        <h3>Flavors</h3>
+        <ul class="list">
+            <th th:each="flavor : ${flavors}">
+                <a th:href="@{/shop/flavors/{cat}/{flavor}(cat=${cat},flavor=${flavor.toString()})}">
+                    <li th:text="${flavor}"></li>
+                </a>
+            </th>
+        </ul>
+    </div>
+    </div>
+    <section class="prod">
+<div class="subProd" th:each="product : ${products}">
+    <div class="image">
+        <a class="ancProd" th:href="@{/shop/details/{prodId}(prodId=${product.id})}"><img height="167px" width="130px" th:src="@{'/'+${product.picture}}"></a>
+    </div>
+    <div class="card-body">
+        <a class="ancProd" th:href="@{/shop/details/{prodId}(prodId=${product.id})}"><p class="descriptionC" th:text="${product.name}">No</p></a>
+        <p class="textP" th:text="${product.price}+' lei'">12</p>
+        <form method="get" th:action="@{/shop/details/{prodId}(prodId=${product.id})}">
+        <input type="hidden">
+       <input type="submit" class="button-30" role="button" value="View Details">
+        </form>
+    </div>
+</div>
+
+</section>
+</div>
+</body>
+</html>

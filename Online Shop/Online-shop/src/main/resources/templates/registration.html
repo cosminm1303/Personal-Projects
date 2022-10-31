@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/registration.css}">
+</head>
+<body>
+<header th:replace="headerFrag :: headerFragment"></header>
+<div class="container">
+    <div th:if="${param.success}">
+        <div class="alert alert-info">You've successfully registered
+            to our site!</div>
+    </div>
+    <div class="title">Registration</div>
+    <div class="content">
+        <form th:action="@{/registration}" method="post" th:object="${user}">
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">First Name</span>
+                    <input type="text" th:field="*{firstName}" placeholder="Enter your first name" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Last Name</span>
+                    <input type="text" th:field="*{lastName}" placeholder="Enter your last name" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="text" th:field="*{email}" placeholder="Enter your email" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Phone Number</span>
+                    <input type="text" th:field="*{phoneNumber}" placeholder="Enter your number" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Password</span>
+                    <input type="password" th:field="*{password}" placeholder="Enter your password" required>
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Register">
+                <span>Already registered? <a href="/" th:href="@{/login}">Login
+								here</a></span>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

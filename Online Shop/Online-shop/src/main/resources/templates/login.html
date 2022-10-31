@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/loginPage.css}">
+</head>
+<body>
+<header th:replace="headerFrag :: headerFragment"></header>
+<div class="container">
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">Invalid username or
+            password.</div>
+    </div>
+
+    <!-- logout message -->
+    <div th:if="${param.logout}">
+        <div class="alert alert-info">You have been logged out.</div>
+    </div>
+    <div class="title">Log In</div>
+    <div class="content">
+        <form th:action="@{/login}" method="post">
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="text" name = "username" placeholder="Enter your Email" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Password</span>
+                    <input type="password" name="password" placeholder="Enter your password" required>
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" name="login-submit" value="Log In">
+                <span>New user? <a href="/" th:href="@{/registration}">Register
+								here</a></span>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

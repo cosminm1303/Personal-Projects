@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/productDetails.css}">
+</head>
+<body>
+<header th:replace="headerFrag :: headerFragment"></header>
+<nav th:replace="princMenuFragment :: homeNavigation"></nav>
+<div class="detContainer">
+    <div th:if="${param.success}">
+        <div class="alert alert-info">Item added to your cart</div>
+    </div>
+    <div th:if="${param.stock}">
+        <div class="alert alert-info">Item out of stock</div>
+    </div>
+    <div class="subDetProd">
+        <h2 th:text="${product.getName()}">Merge</h2>
+        <p th:text="${product.getDescription()}">Merge</p>
+    </div>
+    <div class="prodCard">
+        <div class="formP">
+            <img height="400px" width="300px" th:src="@{'/'+${product.picture}}">
+        </div>
+        <div class="formPContainer">
+            <div class="formP">
+                <p class="price" th:text="${product.getPrice()}+' lei'"></p>
+            </div>
+            <form method="post" th:action="@{/cart/add/{prodId}(prodId=${product.id})}">
+                <div class="formP">
+                    <div>
+                        <label>Aroma</label>
+                    </div>
+                    <div>
+                        <select th:name="flavour" class="sel">
+                            <option th:each="prod : ${productListFlav}" th:text="${prod.getFlavour()}"
+                                    th:value="${prod.getFlavour()}"></option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="formP">
+                    <div>
+                        <label>Gramaj</label>
+                    </div>
+                    <div>
+                        <select th:name="weight" class="sel">
+                            <option th:each="prod : ${productListWeig}" th:text="${prod.getWeight()}"
+                                    th:value="${prod.getWeight()}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="formP">
+                    <div>
+                        <label>Prezentare</label>
+                    </div>
+                    <div>
+                        <select th:name="presentation" class="sel">
+                            <option th:each="prod : ${productListPres}" th:text="${prod.getPresentation()}"
+                                    th:value="${prod.getPresentation()}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="formP">
+                    <div>
+                        <label>Cantitate</label>
+                    </div>
+                    <div>
+                        <input class="selI" type="number" value="1" min="1" max="10" th:name="quantity"></input>
+                    </div>
+                </div>
+                <div class="formP">
+                    <input type="submit" class="button-30" role="button" value="Add to Cart">
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

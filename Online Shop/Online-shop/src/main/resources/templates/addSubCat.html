@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}" />
+</head>
+<body>
+<nav th:replace="menuFragment :: navigation"></nav>
+<h1 class="title">Add Sub category</h1>
+<form class="form" th:action="@{/admin/subCategory/add}" method="post" th:object="${subCategory}">
+
+    <input type="hidden" name="id" th:field="*{id}">
+
+    <div class="form">
+        <label>Name:
+            <input class="textInp" th:field="*{name}" type="text" name="name">
+            <p class="validationError" th:errors="${subCategory.name}"></p>
+        </label>
+    </div>
+    <input class="button-3" type="submit" value="Add Sub Category">
+
+</form>
+</body>
+</html>

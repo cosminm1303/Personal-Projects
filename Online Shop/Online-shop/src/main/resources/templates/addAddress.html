@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/accountDetails.css}">
+</head>
+<body>
+<header th:replace="headerFrag :: headerFragment"></header>
+<nav th:replace="princMenuFragment :: homeNavigation"></nav>
+<div class="headA">
+    <h2 class="accTi">Contul meu</h2>
+</div>
+<div class="containerA">
+    <div class="subMenu">
+        <ul>
+            <li><a class="subA" th:href="@{/account/details}">Contul meu</a></li>
+            <li><a class="subA" th:href="@{/account/orders}">Comenzile mele</a></li>
+            <li><a class="subA" th:href="@{/account/address}">Adresele mele</a></li>
+        </ul>
+    </div>
+    <div class="mainColumn">
+        <div class="block-title">
+            <strong>Adresa</strong>
+        </div>
+        <div class="block-content">
+            <div class="account-infoA">
+                <form method="post" th:action="@{/account/address/add}" th:object="${addressDTO}">
+                    <input type="hidden" name="id" th:field="*{id}">
+                    <div class="form-item">
+                        <label>Strada*</label>
+                        <input type="text" th:name="street" th:field="*{street}" required>
+                    </div>
+                    <div class="form-item">
+                        <label>Numar*</label>
+                        <input type="text" th:name="number" th:field="*{number}" required>
+                    </div>
+                    <div class="form-item">
+                        <label>Tara*</label>
+                        <input type="text" th:name="country" th:field="*{country}" required>
+                    </div>
+                    <div class="form-item">
+                        <label>Judet*</label>
+                        <input type="text" th:name="county" th:field="*{county}" required>
+                    </div>
+                    <div class="form-item">
+                        <label>Oras*</label>
+                        <input type="text" th:name="city" th:field="*{city}" required>
+                    </div>
+                    <div class="form-item">
+                        <label>Cod Postal*</label>
+                        <input type="text" th:name="postalCode" th:field="*{postalCode}" required>
+                    </div>
+                    <div class="form-item">
+                        <input type="submit" class="button-3" value="Add address">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

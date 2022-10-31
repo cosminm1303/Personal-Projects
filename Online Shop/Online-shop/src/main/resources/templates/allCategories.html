@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/table.css}" />
+</head>
+<body>
+<nav th:replace="menuFragment :: navigation"></nav>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    </thead>
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.id}"></td>
+        <td th:text="${category.name}"></td>
+        <td><a class="button-3" th:href="@{/admin/category/delete/{id}(id=${category.id})}">Delete</a></td>
+        <td><a class="button-3" id="update" th:href="@{/admin/category/update/{id}(id=${category.id})}">Update</a></td>
+    </tr>
+</table>
+</body>
+</html>

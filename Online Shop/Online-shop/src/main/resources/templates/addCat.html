@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}" />
+</head>
+<body>
+<nav th:replace="menuFragment :: navigation"></nav>
+<h1 class="title">Add category</h1>
+<form class="form" th:action="@{/admin/category/add}" method="post" th:object="${category}">
+
+    <input type="hidden" name="id" th:field="*{id}">
+
+    <div class="form">
+        <label>Name:
+            <input class="textInp" th:field="*{name}" type="text" name="name">
+            <p class="validationError" th:errors="${category.name}"></p>
+        </label>
+    </div>
+    <input class="button-3" type="submit" value="Add category">
+
+</form>
+</body>
+</html>

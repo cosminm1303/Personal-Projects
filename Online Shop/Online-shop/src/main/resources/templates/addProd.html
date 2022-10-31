@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}" />
+</head>
+<body>
+<nav th:replace="menuFragment :: navigation"></nav>
+<h1 class="title">Add products</h1>
+<form class="form" th:action="@{'/admin/product/add/'+${type}}" method="post" th:object="${productDTO}" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:field="*{id}">
+    <div class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    <div class="form">
+        <label>Name:
+            <input class="textInp" type="text" name="name" th:field="*{name}">
+        </label>
+    </div>
+
+    <div class="validationError" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></div>
+    <div class="form">
+        <label>Stock:
+            <input class="textInp" type="text" name="stock" th:field="*{stock}">
+        </label>
+    </div>
+
+    <div class="form">
+            <textarea name="description" th:field="*{description}" rows="5" cols="33" placeholder="Description"></textarea>
+        <div class="validationError"
+              th:if="${#fields.hasErrors('description')}"
+              th:errors="*{description}">Name Error</div>
+    </div>
+
+    <div class="form">
+        <label>Picture:
+            <input class="button-3" type="file" name="prodImg" accept="image/jpeg">
+        </label>
+    </div>
+
+    <div class="form">
+        <label>Price:
+            <input class="textInp" type="text" name="price" th:field="*{price}">
+        </label>
+    </div>
+
+    <div class="form" th:if="${type=='proteine'||type=='creatina'||type=='aminoacizi'}">
+        <label>Flavour:
+            <input class="textInp" type="text" name="flavour" th:field="*{flavour}">
+        </label>
+    </div>
+
+    <div class="form" th:if="${type=='proteine'||type=='creatina'||type=='aminoacizi'}">
+        <label>Weight:
+            <input class="textInp" type="text" name="weight" th:field="*{weight}">
+        </label>
+    </div>
+
+    <div class="form" th:if="${type=='proteine'||type=='creatina'||type=='aminoacizi'}">
+        <label>Presentation:
+            <input class="textInp" type="text" name="presentation" th:field="*{presentation}">
+        </label>
+    </div>
+
+    <div class="form" th:if="${type=='imbracaminte'}">
+        <label>Size:
+            <input class="textInp" type="text" name="size" th:field="*{size}">
+        </label>
+    </div>
+
+    <div class="form" th:if="${type=='imbracaminte'}">
+        <label>Color:
+            <input class="textInp" type="text" name="color" th:field="*{color}">
+        </label>
+    </div>
+
+    <div class="form" th:if="${type=='imbracaminte'}">
+        <label>Genre:
+            <input class="textInp" type="text" name="genre" th:field="*{genre}">
+        </label>
+    </div>
+
+    <div class="form">
+        <label>Category
+            <select name="categoryId" th:field="*{categoryId}">
+                <option th:each="eventCategory : ${categories}" th:text="${eventCategory.name}" th:value="${eventCategory.id}"></option>
+            </select>
+        </label>
+    </div>
+
+    <div class="form">
+        <label>Category
+            <select name="categoryId" th:field="*{subcategoryId}">
+                <option th:each="eventSubCategory : ${subCategories}" th:text="${eventSubCategory.name}" th:value="${eventSubCategory.id}"></option>
+            </select>
+        </label>
+    </div>
+
+    <input class="button-3" type="submit" value="Add product">
+
+
+</form>
+</body>
+</html>

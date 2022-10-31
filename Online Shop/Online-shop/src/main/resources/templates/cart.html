@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/productStyle.css}">
+</head>
+<body>
+<header th:replace="headerFrag :: headerFragment"></header>
+<nav th:replace="princMenuFragment :: homeNavigation"></nav>
+<div class="titlu">
+    <div>
+        <h2>Cart</h2>
+    </div>
+</div>
+<div th:if="${param.stock}">
+    <div class="alert alert-info">Stoc insuficient</div>
+</div>
+<div th:if="${param.emptyCart}">
+    <div class="alert alert-info">Empty cart</div>
+</div>
+<div class="containerC">
+<section class="prodC">
+    <div class="subProdC" th:each="item : ${cartItems}">
+        <div class="image">
+            <img height="150px" width="150px" th:src="@{'/'+${item.product.getPicture()}}">
+        </div>
+        <div class="card-bodyC">
+            <p th:text="${item.product.getName()}">No</p>
+            <p th:text="${item.product.getPrice()}+' lei'">12</p>
+            <form class="formatic" method="post" th:action="@{/cart/update/{id}(id=${item.getId()})}">
+            <input type="number" th:value="${item.quantity}" th:name="quantity" min="1" max="10"></input>
+            <!--<p th:text="'Quantity '+${item.quantity}"></p>-->
+            <p th:text="'Subtotal '+${item.quantity*item.product.getPrice} + ' lei'"></p>
+            <p><input type="submit" class="button-3" value="Update"></input></p>
+            </form>
+            <a class="button-3" th:href="@{/cart/delete/{id}(id=${item.getId()})}">Delete</a>
+        </div>
+    </div>
+</section>
+    <div class="total">
+        <div class="subTotal">
+        <p class="total" th:text="'Total '+${total}+' lei'"></p>
+        <form method="get" th:action="@{/order}">
+            <input type="hidden" th:value="${cartItems}">
+            <input type="submit" class="button-3" value="Checkout">
+        </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}" />
+</head>
+<body>
+<nav class="nav" th:fragment="homeNavigation">
+    <ul>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Proteine</a>
+            <div class="dropdown-content">
+                <a th:href="@{/shop/{cat}/{sCat}(cat=${'Proteine'},sCat=${'Proteine din zer'})}">Proteine din zer</a>
+                <a th:href="@{/shop/{cat}/{sCat}(cat=${'Proteine'},sCat=${'Proteine vegane'})}">Proteine vegane</a>
+                <a th:href="@{/shop/{cat}/{sCat}(cat=${'Proteine'},sCat=${'Amestecuri proteice'})}">Amestecuri proteice</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Creatina</a>
+            <div class="dropdown-content">
+                <a th:href="@{/shop/{sCat}(sCat=${'Monohidrata'})}">Monohidrata</a>
+                <a th:href="@{/shop/{sCat}(sCat=${'Formule Complexe'})}">Formule complexe</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Aminoacizi</a>
+            <div class="dropdown-content">
+                <a th:href="@{/shop/{sCat}(sCat=${'Glutamina'})}">Glutamina</a>
+                <a th:href="@{/shop/{sCat}(sCat=${'BCAA'})}">BCAA & EAEE</a>
+                <a th:href="@{/shop/{sCat}(sCat=${'Arginina'})}">Arginina</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Imbracaminte barbati</a>
+            <div class="dropdown-content">
+                <a th:href="@{/shop/{sCat}(sCat=${'Tricouri'})}">Tricouri</a>
+                <a th:href="@{/shop/{sCat}(sCat=${'Pantaloni'})}">Pantaloni</a>
+                <a th:href="@{/shop/{sCat}(sCat=${'Hanorace'})}">Hanorace</a>
+                <a th:href="@{/shop/{sCat}(sCat=${'Accesorii'})}">Accesorii</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Imbracaminte femei</a>
+            <div class="dropdown-content">
+                <a href="#">Tricouri</a>
+                <a href="#">Pantaloni</a>
+                <a href="#">Bustiere</a>
+                <a href="#">Colanti</a>
+                <a href="#">Hanorace</a>
+                <a th:href="@{/shop/{sCat}(sCat=${'Accesorii'})}">Accesorii</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

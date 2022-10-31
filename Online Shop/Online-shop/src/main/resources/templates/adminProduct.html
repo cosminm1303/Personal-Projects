@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/table.css}" />
+</head>
+<body>
+<nav th:replace="menuFragment :: navigation"></nav>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Sub Category</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    </thead>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.category.getName()}"></td>
+        <td th:text="${product.subCategory.getName()}"></td>
+        <td><a class="button-3" th:href="@{/admin/product/delete/{id}(id=${product.id})}">Delete</a></td>
+        <td><a class="button-3" id="update" th:href="@{/admin/product/update/{id}/{type}(id=${product.id},type=${product.getCategory().getName()})}">Update</a></td>
+    </tr>
+</table>
+</body>
+</html>

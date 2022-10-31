@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/adminMenu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/accountDetails.css}">
+</head>
+<body>
+<header th:replace="headerFrag :: headerFragment"></header>
+<nav th:replace="princMenuFragment :: homeNavigation"></nav>
+<div class="headA">
+    <h2 class="accTi">Contul meu</h2>
+</div>
+<div class="containerA">
+    <div class="subMenuO">
+        <ul>
+            <li><a class="subA" th:href="@{/account/details}">Contul meu</a></li>
+            <li><a class="subA" th:href="@{/account/orders}">Comenzile mele</a></li>
+            <li><a class="subA" th:href="@{/account/address}">Adresele mele</a></li>
+        </ul>
+    </div>
+    <div class="mainColumnAdd">
+        <div class="block-contentAdd">
+            <div class="address-table">
+                <div class="acc-info-title">
+                    <p>Comenzi finalizate</p>
+                </div>
+                <table>
+                    <thead>
+                    <tr class="thead">
+                        <th>Comanda #</th>
+                        <th>Data</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.getId()}"></td>
+                        <td th:text="${order.getTime()}"></td>
+                        <td th:text="${order.getTotal()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

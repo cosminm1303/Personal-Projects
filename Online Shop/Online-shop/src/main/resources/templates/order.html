@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/order.css}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="logo"><a href="/"><img height="150px" th:src="@{/logo.png}"></a></div>
+    <div class="text"><p>Finalizare Comanda</p></div>
+</div>
+<div class="container">
+    <form th:action="@{/order/success}">
+        <div class="form_class">
+            <div class="form_int">
+                <div class="title">ALEGE METODA DE LIVRARE</div>
+                <div class="desc_contA">
+                    <div class="radio_disp">
+                        <input type="radio" th:value="'curier'" name="transport" checked>
+                    </div>
+                    <div class="description">
+                        <label th:text="'Curier '+${transport}+' lei'"></label>
+                        <small>24-48h lucratoare</small>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form_int">
+                <div class="title">ADRESA DE LIVRARE</div>
+                <div class="desc_contB">
+                    <th:block th:if="${addresses.size()==0}">
+                        <div class="acc-info-actions">
+                            <a class="button-3" th:href="@{/account/address/add}" >Adaugati</a>
+                        </div>
+                    </th:block>
+                    <th:block th:if="${addresses.size()>0}" th:each="address : ${addresses}">
+                        <div class="address">
+                            <div class="radio_disp">
+                                <input type="radio" class="product-list" th:value="${address.getId()}" name="address">
+                            </div>
+                            <div>
+                                <div class="acc-info-main">
+                                    <p th:text="${user.getFirstName()}+' '+${user.getLastName()}">Cosmin Mihu</p>
+                                    <p th:text="'Strada: '+${address.getStreet()}+' Nr. '+${address.getNumber()}">Cosmin
+                                        Mihu</p>
+                                    <p th:text="${address.getCounty()}+', '+${address.getCity()}">Cosmin Mihu</p>
+                                    <p th:text="${address.getPostalCode()}+', '+${address.getCountry()}">
+                                        cosmin.mihu@yahoo.com</p>
+                                    <p th:text="'Telefon: '+${user.getPhoneNumber()}">Cosmin Mihu</p>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+            <div class="form_int">
+                <div class="title">ALEGE METODA DE PLATA</div>
+                <div class="desc_contC">
+                    <div class="radio_disp">
+                        <input type="radio" th:value="'ramburs'" name="pay" checked>
+                    </div>
+                    <div class="description">
+                        <label>Ramburs</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div><input class="button-3" type="submit" value="Plaseaza Comanda"></div>
+    </form>
+    <div class="scroll">
+        <div class="order_details">
+            <div class="up">
+                <strong>SUMAR COMANDA</strong>
+            </div>
+            <div class="mid">
+                <p th:text="${totalProduct>1} ? ${totalProduct}+' produse in cos' : ${totalProduct}+' produs in stoc' ">1 produs in cos</p>
+                <div th:each="product : ${products}">
+                    <p style="float: left" th:text="${product.getName()}">WPI</p>
+                    <p style="float: right" th:text="${product.getPrice()}">100 RON</p>
+                </div>
+            </div>
+            <div class="down">
+                <div>
+                    <p style="float: left">Total produse</p>
+                    <p style="float: right" th:text="${total}">100 RON</p>
+                </div>
+                <div>
+                    <p style="float: left">Transport</p>
+                    <p style="float: right" th:text="${transport}">100 RON</p>
+                </div>
+            </div>
+            <div class="total">
+                <div>
+                    <p style="float: left"><strong>TOTAL</strong></p>
+                    <p style="float: right" th:text="${total+transport}">100 RON</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.product-list').on('change', function () {
+        $('.product-list').not(this).prop('checked', false);
+    });
+</script>
+</body>
+</html>
